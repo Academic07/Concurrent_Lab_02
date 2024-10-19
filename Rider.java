@@ -1,12 +1,12 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Rider implements Runnable {
-    private static AtomicInteger nextId = new AtomicInteger(0);  // Thread-safe ID generator
+    private static AtomicInteger riderId = new AtomicInteger(0);  
     private int id;
     private BusStop busStop;
 
     public Rider(BusStop busStop) {
-        this.id = nextId.getAndIncrement();  // Safely generate unique ID
+        this.id = riderId.getAndIncrement();  
         this.busStop = busStop;
     }
 
@@ -19,7 +19,7 @@ public class Rider implements Runnable {
         try {
             busStop.addRider(this);  // Rider arrives at the bus stop
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();  // Handle interruption safely
+            Thread.currentThread().interrupt();  
         }
     }
 }
